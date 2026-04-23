@@ -14,9 +14,6 @@
         "description": "Absolute path to your local OpenMontage workspace (e.g. /Users/you/Documents/OpenMontage)"
       }
     },
-    "required": [
-      "workspacePath"
-    ]
   },
   "uiHints": {
     "workspacePath": {
