@@ -82,9 +82,9 @@ Remotion + FFmpeg). Premium paths add AI image/video generation and ElevenLabs T
 
 | Path | Cost | Unlocks |
 |---|---|---|
-| Zero key | $0 | Full pipeline with free tools |
+| Zero key | $0 | Pipelines with a free path (explainer, animation, screen-demo, hybrid, clip-factory) |
 | FAL_KEY | ~$0.15–$1.50 | FLUX AI image generation |
-| Full setup | ~$1–$3 | Video gen (Veo/Kling/Seedance) + ElevenLabs + music |
+| Full setup | ~$1–$3 | Video gen (Veo/Kling/Runway/Seedance) + ElevenLabs + music |
 
 ## Pipelines
 
@@ -100,6 +100,7 @@ Remotion + FFmpeg). Premium paths add AI image/video generation and ElevenLabs T
 | `clip-factory` | Multi-clip from long source | beta |
 | `podcast-repurpose` | Podcast highlights | beta |
 | `localization-dub` | Translate and dub | beta |
+| `documentary-montage` | Real-footage montage, tone-poem style | beta |
 
 ## How it works
 

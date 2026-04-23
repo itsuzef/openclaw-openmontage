@@ -24,11 +24,16 @@ the OpenMontage workspace via the protocol in `delegate.md`.
 - User wants to turn written content (blog post, script, notes, URL) into a video
 - User asks what video formats or styles are possible
 - User says "make me a video about X" or "can you create a video for Y"
+- **User provides a video URL or local file as inspiration** — "make something like this",
+  "I love this YouTube Short, make me something similar", "use this Reel as a reference".
+  This is a first-class workflow: run reference analysis before capability audit. Read
+  `delegate.md` — it covers the reference-video path specifically.
 
 ## What OpenMontage produces
 
 Full production pipelines end-to-end: research → script → scene plan → assets → edit →
-compose → render. Every pipeline has a zero-cost path using free tools.
+compose → render. Most pipelines have a zero-cost path; `cinematic` and
+`avatar-spokesperson` require paid APIs (video gen and HeyGen respectively).
 
 ### Output types
 

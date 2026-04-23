@@ -11,8 +11,8 @@ see-also:
 # Pipeline Reference
 
 Match the user's brief to a pipeline. When genuinely uncertain, ask one clarifying
-question (topic, target platform, or intended audience) rather than guessing. See
-`{workspacePath}/pipeline_defs/` for the full manifests.
+question (topic, target platform, or intended audience) rather than guessing. For the
+full manifests, see the `pipeline_defs/` directory in your OpenMontage workspace.
 
 ---
 

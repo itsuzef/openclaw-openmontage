@@ -18,16 +18,19 @@ that fails.
 
 ## Step 1 — Resolve the workspace path
 
-Get the workspace path from the plugin config key
-`plugins.entries.openmontage.config.workspacePath`.
+Retrieve the configured workspace path by running:
 
-If it is not set, tell the user and stop:
+```bash
+openclaw config get plugins.entries.openmontage.config.workspacePath
+```
+
+If the command returns nothing or the plugin is not configured, tell the user and stop:
 
 > "OpenMontage isn't configured yet. Set the workspace path:
 > `openclaw config set plugins.entries.openmontage.config.workspacePath /path/to/OpenMontage`
 > Get OpenMontage at https://github.com/itsuzef/OpenMontage"
 
-Verify the path exists before continuing.
+Verify the path exists on disk before continuing.
 
 ---
 
@@ -94,14 +97,23 @@ Check `required_tools` against the registry. Report `passed`, `degraded`, or `bl
 
 Before any asset generation, present all of the following to the user:
 
-1. Chosen pipeline and rationale
-2. Tool path — which specific providers will be used for TTS, image gen, video gen, music
-3. **Composition runtime options** — if Remotion and HyperFrames are both available, present
-   both with a recommendation. This is a hard rule in AGENT_GUIDE.md — never silently pick one.
-4. Cost estimate (free vs. paid paths)
-5. Music plan — check `{workspacePath}/music_library/` for existing tracks, then list
-   API options; always give the user an explicit choice (see AGENT_GUIDE.md → Music Plan)
-6. Stage-by-stage production plan
+1. **4–5 concept directions** when the brief is still open — short takes showing different
+   creative angles, pacing, or visual styles. Skip this only if the user has already given
+   a specific, fully-formed direction.
+2. Chosen pipeline and rationale
+3. Recommended tool path — which specific providers will be used for TTS, image gen,
+   video gen, music
+4. Alternative tool paths that are actually available (not just the recommended one)
+5. Cost estimate **and quality tradeoffs** — for each path, state the honest tradeoff
+   (e.g. "Piper TTS is free but robotic; ElevenLabs adds $0.30 and sounds human")
+6. **Composition runtime options** — if Remotion and HyperFrames are both available,
+   present both with a one-sentence description and honest tradeoff, then recommend one.
+   This is a hard rule in AGENT_GUIDE.md — never silently pick one.
+7. Music plan — check `{workspacePath}/music_library/` for existing tracks, then list
+   API generation options and royalty-free alternatives; always give the user an explicit
+   choice: library track / drop your own / generate via API / proceed without music.
+   (See AGENT_GUIDE.md → Music Plan for the full protocol.)
+8. Stage-by-stage production plan
 
 **Wait for explicit user approval before advancing to asset generation.**
 
@@ -117,10 +129,25 @@ For each stage, read its director skill before doing any work:
 
 Stages: `idea` → `script` → `scene_plan` → `assets` → `edit` → `compose`
 
-Before calling any generation tool (video, image, TTS, music), check the tool's
-`agent_skills` field in the registry and read the referenced Layer 3 skill from
-`{workspacePath}/.agents/skills/`. This is mandatory — it contains provider-specific
-prompting guidance that significantly affects output quality.
+Before calling any generation tool (video, image, TTS, music), find the tool's
+`agent_skills` field by inspecting the registry:
+
+```bash
+cd {workspacePath}
+python -c "
+from tools.tool_registry import registry
+import json
+registry.discover()
+env = registry.support_envelope()
+for t in env.get('tools', []):
+    if t.get('agent_skills'):
+        print(t['name'], '->', t['agent_skills'])
+"
+```
+
+Then read the referenced skill files from `{workspacePath}/.agents/skills/`. This is
+mandatory — provider-specific prompting guidance in those skills is the difference
+between generic and cinematic output.
 
 Checkpoint after each stage. Pause for human approval on creative stages
 (`idea`, `script`, `scene_plan`). Technical stages (`assets`, `edit`, `compose`)
@@ -153,3 +180,11 @@ These come directly from AGENT_GUIDE.md and apply for the entire session:
 - **Escalate blockers explicitly.** State what was attempted, what failed, and what the options are.
   Do not silently substitute a provider or runtime — get user approval first.
 - **Do not change provider, model, or render path** without telling the user and getting approval.
+- **Motion-required requests:** For any brief that inherently depends on motion — sci-fi
+  trailers, cinematic teasers, hype edits, avatar videos, anything whose promise depends
+  on moving shots — treat motion as a **hard requirement**. Still-image fallback is
+  forbidden. Do not quietly convert to a Ken Burns animatic or slide-based video. If video
+  generation is unavailable or fails, surface a structured blocker and wait for the user
+  to approve a downgrade explicitly. Silent runtime swap is also forbidden: if
+  `render_runtime="hyperframes"` was locked and HyperFrames is unavailable, do NOT route
+  to Remotion — surface the blocker first.
