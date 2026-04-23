@@ -1,6 +1,6 @@
 {
   "name": "@itsuzef/openclaw-openmontage",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "OpenClaw plugin — AI video production via a local OpenMontage workspace",
   "type": "module",
   "license": "MIT",
