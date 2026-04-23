@@ -38,6 +38,14 @@
   "openclaw": {
     "extensions": [
       "./index.ts"
-    ]
+    ],
+    "compat": {
+      "pluginApi": ">=2026.1.26",
+      "minGatewayVersion": "2026.1.26"
+    },
+    "build": {
+      "openclawVersion": "2026.1.26",
+      "pluginSdkVersion": "2026.1.26"
+    }
   }
 }
