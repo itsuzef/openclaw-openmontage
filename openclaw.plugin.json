@@ -13,7 +13,7 @@
         "type": "string",
         "description": "Absolute path to your local OpenMontage workspace (e.g. /Users/you/Documents/OpenMontage)"
       }
-    },
+    }
   },
   "uiHints": {
     "workspacePath": {
