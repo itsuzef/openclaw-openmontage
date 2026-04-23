@@ -1,0 +1,28 @@
+{
+  "id": "openmontage",
+  "name": "OpenMontage",
+  "description": "AI video production — animated explainers, cinematic trailers, avatar videos, screen demos, and more. Delegates to a local OpenMontage workspace.",
+  "skills": [
+    "./skills"
+  ],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "workspacePath": {
+        "type": "string",
+        "description": "Absolute path to your local OpenMontage workspace (e.g. /Users/you/Documents/OpenMontage)"
+      }
+    },
+    "required": [
+      "workspacePath"
+    ]
+  },
+  "uiHints": {
+    "workspacePath": {
+      "label": "Workspace Path",
+      "placeholder": "~/Documents/OpenMontage",
+      "help": "Absolute path to your local OpenMontage clone. Get OpenMontage at https://github.com/itsuzef/OpenMontage"
+    }
+  }
+}

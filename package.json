@@ -1,0 +1,35 @@
+{
+  "name": "@itsuzef/openclaw-openmontage",
+  "version": "1.0.0",
+  "description": "OpenClaw plugin — AI video production via a local OpenMontage workspace",
+  "type": "module",
+  "license": "MIT",
+  "author": "itsuzef",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsuzef/openclaw-openmontage.git"
+  },
+  "homepage": "https://github.com/itsuzef/openclaw-openmontage#readme",
+  "bugs": {
+    "url": "https://github.com/itsuzef/openclaw-openmontage/issues"
+  },
+  "keywords": [
+    "openclaw",
+    "openclaw-plugin",
+    "video",
+    "video-generation",
+    "ai-video",
+    "openmontage"
+  ],
+  "peerDependencies": {
+    "openclaw": ">=2026.1.26"
+  },
+  "devDependencies": {
+    "openclaw": "latest"
+  },
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}
